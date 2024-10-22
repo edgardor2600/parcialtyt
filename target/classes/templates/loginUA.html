@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- íconos Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <title>Login</title>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container-fluid {
+            display: flex;
+            height: 100vh;
+        }
+
+        .image-side {
+            flex: 2; /* La imagen ocupará más espacio */
+            background-image: url('/img/prueba2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Efecto de oscurecimiento */
+        }
+
+        .form-side {
+            flex: 1; /* El formulario ocupará menos espacio */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f2f2f2; /* Fondo gris claro */
+            padding: 40px;
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .card-header {
+            background-color: #7ad04d;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-body {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .form-label {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .input-group-text {
+            background-color: #7ad04d;
+            border: none;
+            color: white;
+        }
+
+        .form-control {
+            border: none;
+            border-bottom: 2px solid #7ad04d;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            border-color: #5c9e3b;
+            box-shadow: none;
+        }
+
+        .d-grid .btn-primary {
+            background-color: #7ad04d;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            transition: background-color 0.5s;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .d-grid .btn-primary:hover {
+            background-color: #5c9e3b;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .d-grid .btn-secondary {
+            background-color: #4d94d0;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            transition: background-color 0.5s;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .d-grid .btn-secondary:hover {
+            background-color: #3671a7;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+        }
+		footer {
+		        text-align: center;
+		        padding: 20px;
+		        background-color: rgba(255, 255, 255, 0.9);
+		        position: absolute;
+		        bottom: 0;
+		        width: 100%;
+		        z-index: 1; /* Asegúrate de que esté encima del fondo */
+		    }
+
+		    .footer-text {
+		        font-size: 18px;
+		        color: rgb(0, 128, 128);
+		        font-weight: bold;
+		        margin: 0;
+		    }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Lado de la imagen -->
+        <div class="image-side">
+            <div class="overlay"></div>
+        </div>
+        
+        <!-- Lado del formulario -->
+        <div class="form-side">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Inicie Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <form action="login" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mb-3">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                            <a href="/" class="btn btn-secondary">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<footer>
+		        <p class="footer-text">Creado por Edgardo Rodríguez</p>
+		    </footer>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\AdminController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\AdminRestController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\AdminsController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\AdminsTemplatesController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\PrincipalController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\UserRestController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\controller\UserWebController.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\entity\Admin.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\entity\User.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\exception\NotFoundException.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\PruebastytApplication.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\repository\AdminRepository.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\repository\UserRepository.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\service\UserService.java
+C:\Users\EDGARDO\Documents\Spring\pruebastyt\src\main\java\com\pruebastyt\app\service\UserServiceImpl.java

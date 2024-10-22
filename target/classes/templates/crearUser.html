@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- íconos Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- jQuery desde CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--Agrega esta línea-->
+
+    <title>Crear Usuario</title>
+</head>
+
+	
+<style>
+	
+	.custom-background {
+	    background-image: url('/img/tyt.jpg');
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    background-attachment: fixed;
+	    height: 100vh;
+	    display: flex;
+	    justify-content: center;
+	    align-items: flex-start;
+	    filter: grayscale(0.5);
+	    padding: 20px;
+	}
+
+	.form-container {
+	    max-width: 800px;
+	    width: 100%;
+	    overflow-y: auto;
+	    border-radius: 15px;
+	    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+	    background: rgba(255, 255, 255, 0.9);
+	    padding: 30px;
+	    margin-top: 20px;
+	    font-weight: bold;
+	}
+
+	.form-title {
+	    text-align: center;
+	    font-size: 32px;
+	    font-weight: bold;
+	    color: #333;
+	    margin-bottom: 20px;
+	    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+	}
+
+	.center-card {
+	    width: 100%;
+	    margin: 0 auto;
+	    background: #d6eaff;
+	    padding: 30px;
+	    margin-top: 20px;
+	    border-radius: 15px;
+	    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.4);
+	}
+
+	.table {
+	    width: 100%;
+	    border-collapse: separate;
+	    border-spacing: 0;
+	    margin-top: 20px;
+	    background-color: #f1f1f1;
+	    border-radius: 12px;
+	    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+	    overflow: hidden;
+	}
+
+	.table td {
+	    text-align: start;
+	    padding: 15px;
+	    vertical-align: middle;
+	    background-color: #fff;
+	    border-radius: 8px;
+	    font-family: 'Poppins', sans-serif;
+	    font-size: 16px;
+	    position: relative;
+	}
+
+	.table td:hover {
+	    background-color: #f5f5f5;
+	}
+
+	.form-control {
+	    width: 100%;
+	    padding: 12px;
+	    border-radius: 5px;
+	    border: 1px solid #ccc;
+	    background-color: #f1f1f1;
+	    transition: border-color 0.3s ease, background-color 0.3s ease;
+	}
+
+	.form-control:focus {
+	    border-color: #007bff;
+	    background-color: #fff;
+	}
+
+	.button-container {
+	    width: 50%;
+	    display: flex;
+	    flex-direction: column;
+	    gap: 15px;
+	    margin: 20px auto 0 auto;
+	    align-items: center;
+	}
+
+	.btn-primary,
+	.btn-danger {
+	    border-radius: 5px;
+	    padding: 15px;
+	    font-size: 16px;
+	    transition: all 0.3s ease;
+	}
+
+	.btn-primary {
+	    background-color: #007bff;
+	    color: white;
+	}
+
+	.btn-danger {
+	    background-color: rgb(255, 0, 0);
+	    color: white;
+	}
+
+	.btn-primary:hover {
+	    background-color: #0056b3;
+	}
+
+	.btn-danger:hover {
+	    background-color: #c82333;
+	}
+
+	.btn-back {
+	    position: absolute;
+	    top: 20px;
+	    left: 20px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    transition: background-color 0.3s ease;
+	    padding: 10px 20px;
+	    border-radius: 5px;
+	}
+
+	.btn-back:hover {
+	    background-color: #0056b3;
+	}
+
+	.custom-icon {
+	    color: #007bff;
+	}
+
+
+
+</style>
+
+<body class="custom-background">
+    <div class="container">
+        <!-- Botón de volver -->
+        <a href="/administrador/" class="btn btn-dark btn-lg btn-back"><i class="bi bi-arrow-left"></i> Volver</a>
+
+		
+        <div class="card center-card">
+            <div class="card-body">
+				<h2 class="form-title">Ingrese los datos</h2>
+
+                <!-- Agrega un contenedor para el formulario con altura máxima y desplazamiento -->
+                <div>
+                    <form action="/administrador/save" th:object="${user}" method="post">
+                        <input type="hidden" th:field="*{id}">
+
+                    <table class="table">
+                    
+                        <tbody>
+							<tr>
+							    <td><label><i class="bi bi-file-earmark-person custom-icon"></i> Tipo de Documento</label></td>
+							    <td>
+							        <select name="tipoDocumento" class="form-control" th:field="*{tipoDocumento}">
+							            <option value="CC">Cédula de Ciudadanía (CC)</option>
+							            <option value="TI">Tarjeta de Identidad (T.I.)</option>
+							        </select>
+							    </td>
+
+							    <td><label><i class="bi bi-card-text custom-icon"></i>  Número de Documento</label></td>
+							    <td><input type="number" name="numDocumento" class="form-control" th:field="*{numDocumento}"></td>
+							</tr>
+
+							<tr>
+							    <td><label><i class="bi bi-person-fill custom-icon"></i>  Nombre completo</label></td>
+							    <td><input type="text" name="fullname" class="form-control" th:field="*{fullname}" placeholder="Nombres y Apellidos"></td>
+
+							    <td><label><i class="bi bi-envelope-fill custom-icon"></i> Correo</label></td>
+							    <td><input type="email" name="email" class="form-control" th:field="*{email}" placeholder="nombre@gmail.com"></td>
+							</tr>
+
+							<tr>
+							    <td><label><i class="bi bi-lock-fill custom-icon"></i> Contraseña</label></td>
+							    <td><input type="password" name="password" class="form-control" th:field="*{password}" ></td>
+
+							    <td><label><i class="bi bi-telephone-fill custom-icon"></i>  Número de Teléfono</label></td>
+							    <td><input type="number" name="numTelefono" class="form-control" th:field="*{numTelefono}" placeholder="+57 3001234***"></td>
+							</tr>
+
+
+                            <tr>
+                            	<td><label><i class="bi bi-card-list custom-icon"></i> Número de registro</label></td>
+                                <td><input type="text" name="numRegister" class="form-control" th:field="*{numRegister}"></td>
+                                
+                                <!-- Asegúrate de que los nombres de los campos coincidan con los utilizados en tu controlador -->
+                                <td><label><i class="bi bi-trophy-fill custom-icon"></i> Puntaje Global</label></td>
+								<td><input type="text" name="PuntajeGlobal" id="PuntajeGlobal" class="form-control" th:field="*{PuntajeGlobal}"></td>
+                                
+					
+	</tr>
+
+                            <tr>
+                           <td><label><i class="bi bi-bar-chart-line custom-icon"></i> Saber Pro Puntaje nivel</label></td>
+                                    <td><select type="text" name="puntajeNivelGlobal" class="form-control" th:field="*{puntajeNivelGlobal}">
+                                            <option value="none"></option>
+                                            <option value="nivel 1">Nivel 1</option>
+                                            <option value="nivel 2">Nivel 2</option>
+                                            <option value="nivel 3">Nivel 3</option>
+                                            <option value="nivel 4">Nivel 4</option>
+                                        </select>
+                                    </td>
+                                
+                                <td><label><i class="bi bi-pencil-fill custom-icon"></i> Comunicación Escrita</label></td>
+                                <td><input type="number" name="comunicacionEscrita" class="form-control" th:field="*{comunicacionEscrita}"></td>
+                          
+                              
+
+	</tr>
+
+                            <tr>
+                            	 <td><label><i class="bi bi-star-fill custom-icon"></i> Comunicación Escrita nivel</label></td>
+                                <td><select type="text" name="comunicacionEscritaNivel" class="form-control" th:field="*{comunicacionEscritaNivel}">
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                </td>
+                                
+                                <td><label><i class="bi bi-calculator-fill custom-icon"></i> Razonamiento Cuantitativo</label></td>
+                                <td><input type="number" name="razonamientoCuantitativo" class="form-control" th:field="*{razonamientoCuantitativo}"></td>
+                          
+                              
+ 						
+	</tr>
+
+                            <tr>
+                            
+                            	<td><label><i class="bi bi-star-fill custom-icon"></i> Razonamiento Cuantitativo Nivel</label></td>
+                                <td><select type="text" name="razonamientoCuantitativoNivel" class="form-control" th:field="*{razonamientoCuantitativoNivel}">
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+
+                                </td>
+                                
+                                <td><label><i class="bi bi-book-fill custom-icon"></i> Lectura crítica</label></td>
+                                <td><input type="number" name="lecturaCritica" class="form-control" th:field="*{lecturaCritica}"></td>
+                          
+	
+                             
+                              
+	</tr>
+
+                            <tr>
+                            	  <td><label><i class="bi bi-star-fill custom-icon"></i> Lectura crítica Nivel</label></td>
+                                <td><select type="text" name="lecturaCriticaNivel" class="form-control" th:field="*{lecturaCriticaNivel}">
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                
+                                </td>
+                                <td><label><i class="bi bi-people-fill custom-icon"></i>  Competencias Ciudadanas</label></td>
+                                <td><input type="number" name="competenciasCiudadanas" class="form-control" th:field="*{competenciasCiudadanas}"></td>
+                        
+                               
+ 						
+	</tr>
+
+                            <tr>
+                             <td><label><i class="bi bi-star-fill custom-icon"></i> Competencias Ciudadanas nivel</label></td>
+                                <td><select type="text" name="competenciasCiudadanasNivel" class="form-control" th:field="*{competenciasCiudadanasNivel}">
+                                
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                
+                                </td>
+                                
+                                <td><label><i class="bi bi-mic-fill custom-icon"></i> Inglés</label></td>
+                                <td><input type="number" name="ingles" class="form-control" th:field="*{ingles}"></td>
+                           
+                                
+	</tr>
+
+                            <tr>
+                            	<td><label><i class="bi bi-star-fill custom-icon"></i> Inglés nivel</label></td>
+                                <td><select type="text" name="inglesNivel" class="form-control" th:field="*{inglesNivel}">
+                                
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                
+                                </td>
+                                
+                                <td><label><i class="bi bi-gear-fill custom-icon"></i> Formulación de proyectos de Ingeniería </label></td>
+                                <td><input type="number" name="proyectosIngenieria" class="form-control" th:field="*{proyectosIngenieria}"></td>
+                           
+                              
+
+	</tr>
+
+                            <tr>
+                            
+                             <td><label><i class="bi bi-star-fill custom-icon"></i> Formulación de proyectos de Ingeniería Nivel</label></td>
+                                <td><select type="text" name="proyectosIngenieriaNivel" class="form-control" th:field="*{proyectosIngenieriaNivel}">
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                </td>
+                                
+                                <td><label><i class="bi bi-calculator custom-icon"></i> Matemáticas Pensamiento Científico - Matemáticas y estadística </label></td>
+                                <td><input type="number" name="pensamientoMatematico" class="form-control" th:field="*{pensamientoMatematico}"></td>
+                          
+                                
+
+	</tr>
+
+                            <tr>
+                            
+                            <td><label><i class="bi bi-star-fill custom-icon"></i> Pensamiento Científico - Matemáticas y estadística Nivel</label></td>
+                                <td><select type="text" name="pensamientoMatematicoNivel" class="form-control" th:field="*{pensamientoMatematicoNivel}">
+                                
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                </td>
+                                
+                                <td><label><i class="bi bi-paint-bucket custom-icon"></i> Diseño de Software </label></td>
+                                <td><input type="number" name="disenhoSoftware" class="form-control" th:field="*{disenhoSoftware}"></td>
+                           
+                                
+ </tr>
+
+                            <tr>
+                            
+                            <td><label><i class="bi bi-star-fill custom-icon"></i> Diseño de Software Nivel</label></td>
+                                <td><select type="text" name="disenhoSoftwareNivel" class="form-control" th:field="*{disenhoSoftwareNivel}">
+                                	<option value="none"></option>
+                                	<option value="nivel 1">Nivel 1</option>
+                                	<option value="nivel 2">Nivel 2</option>
+                                	<option value="nivel 3">Nivel 3</option>
+                                	<option value="nivel 4">Nivel 4</option>
+                                </select>
+                                </td>
+                                <td><label><i class="bi bi-book-fill custom-icon"></i> Nivel de inglés </label></td>
+                                <td><select type="text" name="nivelDeIngles" class="form-control" th:field="*{nivelDeIngles}">
+                                	<option value="none"></option>
+                                	<option value="A0">A0</option>
+                                	<option value="A1">A1</option>
+                                	<option value="A2">A2</option>
+                                	<option value="B1">B1</option>
+                                	<option value="B2">B2</option>
+                                	<option value="C1">C1</option>
+                                </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="button-container">
+    <button class="btn btn-primary col-12">Agregar</button>
+    <button class="btn btn-danger col-12" onclick="anularValores()">Anular Estudiante</button>
+
+</div>
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#PuntajeGlobal').on('input', function() {
+                var puntajeGlobal = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (puntajeGlobal >= 0 && puntajeGlobal <= 125) {
+                    nivel = 'nivel 1';
+                } else if (puntajeGlobal > 125 && puntajeGlobal <= 155) {
+                    nivel = 'nivel 2';
+                } else if (puntajeGlobal > 155 && puntajeGlobal <= 190) {
+                    nivel = 'nivel 3';
+                } else if (puntajeGlobal > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="puntajeNivelGlobal"]').val(nivel);
+            });
+        });
+    </script>
+   
+    
+    <script>
+        $(document).ready(function() {
+            $('#comunicacionEscrita').on('input', function() {
+                var comunicacionEscrita = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (comunicacionEscrita >= 0 && comunicacionEscrita <= 125) {
+                    nivel = 'nivel 1';
+                } else if (comunicacionEscrita > 125 && comunicacionEscrita <= 155) {
+                    nivel = 'nivel 2';
+                } else if (comunicacionEscrita > 155 && comunicacionEscrita <= 190) {
+                    nivel = 'nivel 3';
+                } else if (comunicacionEscrita > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="comunicacionEscritaNivel"]').val(nivel);
+            });
+        });
+    </script>
+   
+     <script>
+        $(document).ready(function() {
+            $('#razonamientoCuantitativo').on('input', function() {
+                var razonamientoCuantitativo = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (razonamientoCuantitativo >= 0 && razonamientoCuantitativo <= 125) {
+                    nivel = 'nivel 1';
+                } else if (razonamientoCuantitativo > 125 && razonamientoCuantitativo  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (razonamientoCuantitativo > 155 && razonamientoCuantitativo <= 190) {
+                    nivel = 'nivel 3';
+                } else if (razonamientoCuantitativo > 190) {
+                    nivel = 'nivel 4';
+                }-
+
+                $('select[name="razonamientoCuantitativoNivel"]').val(nivel);
+            });
+        });
+    </script>
+   
+   <script>
+        $(document).ready(function() {
+            $('#lecturaCritica').on('input', function() {
+                var lecturaCritica = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (lecturaCritica >= 0 && lecturaCritica <= 125) {
+                    nivel = 'nivel 1';
+                } else if (lecturaCritica > 125 &&lecturaCritica  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (lecturaCritica > 155 && lecturaCritica <= 190) {
+                    nivel = 'nivel 3';
+                } else if (lecturaCritica > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="lecturaCriticaNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#competenciasCiudadanas').on('input', function() {
+                var competenciasCiudadanas = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (competenciasCiudadanas >= 0 && competenciasCiudadanas <= 125) {
+                    nivel = 'nivel 1';
+                } else if (competenciasCiudadanas > 125 &&competenciasCiudadanas  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (competenciasCiudadanas > 155 && competenciasCiudadanas <= 190) {
+                    nivel = 'nivel 3';
+                } else if (competenciasCiudadanas > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="competenciasCiudadanasNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+      <script>
+        $(document).ready(function() {
+            $('#ingles').on('input', function() {
+                var ingles = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (ingles >= 0 && ingles <= 125) {
+                    nivel = 'nivel 1';
+                } else if (ingles > 125 &&ingles  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (ingles > 155 && ingles <= 190) {
+                    nivel = 'nivel 3';
+                } else if (ingles > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="inglesNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+     <script>
+        $(document).ready(function() {
+            $('#proyectosIngenieria').on('input', function() {
+                var proyectosIngenieria = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (proyectosIngenieria >= 0 && proyectosIngenieria <= 125) {
+                    nivel = 'nivel 1';
+                } else if (proyectosIngenieria > 125 && proyectosIngenieria  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (proyectosIngenieria > 155 && proyectosIngenieria <= 190) {
+                    nivel = 'nivel 3';
+                } else if (proyectosIngenieria > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="proyectosIngenieriaNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+    
+    
+       <script>
+        $(document).ready(function() {
+            $('#pensamientoMatematico').on('input', function() {
+                var pensamientoMatematico = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (pensamientoMatematico >= 0 && pensamientoMatematico <= 125) {
+                    nivel = 'nivel 1';
+                } else if (pensamientoMatematico > 125 && pensamientoMatematico  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (pensamientoMatematico > 155 && pensamientoMatematico <= 190) {
+                    nivel = 'nivel 3';
+                } else if (pensamientoMatematico > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="pensamientoMatematicoNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+       <script>
+        $(document).ready(function() {
+            $('#disenhoSoftware').on('input', function() {
+                var disenhoSoftware = parseInt($(this).val());
+                var nivel = 'none';
+
+                if (disenhoSoftware >= 0 && disenhoSoftware <= 125) {
+                    nivel = 'nivel 1';
+                } else if (disenhoSoftware > 125 && disenhoSoftware  <= 155) {
+                    nivel = 'nivel 2';
+                } else if (disenhoSoftware > 155 && disenhoSoftware <= 190) {
+                    nivel = 'nivel 3';
+                } else if (disenhoSoftware > 190) {
+                    nivel = 'nivel 4';
+                }
+
+                $('select[name="disenhoSoftwareNivel"]').val(nivel);
+            });
+        });
+    </script>
+    
+   
+
+   <script>
+
+   function anularValores() {
+	    console.log("Función anularValores() llamada.");
+
+	    // Seleccionar el input de puntaje global por su ID
+	    var puntajeGlobalInput = document.getElementById('PuntajeGlobal');
+
+	    console.log("Elemento PuntajeGlobal:", puntajeGlobalInput);
+
+	    // Verificar si el input de puntaje global existe
+	    if (puntajeGlobalInput) {
+	        puntajeGlobalInput.value = "ANULADO";
+	        console.log("Valor del PuntajeGlobal cambiado a 'ANULADO'. Nuevo valor:", puntajeGlobalInput.value);
+	    }
+
+	    // Obtener todos los inputs y selects dentro del formulario
+	    var inputs = document.querySelectorAll('input, select');
+
+	    // Excluir los campos específicos
+	    var camposExcluidos = ["id", "numDocumento", "fullname", "email", "numTelefono", "numRegister", "tipoDocumento", "password"];
+
+	    // Iterar sobre cada campo y anularlo si no está en la lista de campos excluidos
+	    inputs.forEach(function(input) {
+	        var nombreCampo = input.getAttribute("name");
+	        // Verificar si el campo no está en la lista de campos excluidos
+	        if (nombreCampo && !camposExcluidos.includes(nombreCampo)) {
+	            // Verificar si el campo es numérico
+	            if (!isNaN(parseFloat(input.value)) && isFinite(input.value)) {
+	                // Convertir el valor a cero solo si es numérico
+	                input.value = 0;
+	            } else {
+	                // Si no es numérico, establecerlo como "ANULADO"
+	                input.value = "ANULADO";
+	            }
+	        }
+	    });
+	}
+
+
+
+</script>
+   
+
+
+
+
+
+
+    <!-- ====================================================================================================== -->
+    <!-- Scripts de Bootstrap y otros scripts personalizados -->
+  
+
+    <!-- Popper.js desde CDN (necesario para Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
