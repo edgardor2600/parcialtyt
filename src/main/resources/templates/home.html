@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados Usuarios</title>
+    <!-- Bootstrap CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- íconos Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+         
+		body {
+		    font-family: 'Roboto', sans-serif;
+		    background: linear-gradient(to right, rgba(102, 125, 182, 0.6), rgba(0, 130, 200, 0.5), rgba(0, 130, 200, 0.5), rgba(102, 125, 182, 0.5)), url('/img/resultados2.jpg');
+		    background-size: cover; /* Hace que la imagen de fondo cubra toda la pantalla */
+		    background-position: center; /* Centra la imagen */
+		    background-repeat: no-repeat; /* Evita que la imagen se repita */
+		    background-attachment: fixed; /* La imagen se fija cuando se hace scroll */
+		}
+
+		.container {
+		    display: flex; /* Establece un contenedor flex */
+		    justify-content: center; /* Centra los elementos horizontalmente en el contenedor */
+		    flex-wrap: wrap; /* Permite que los elementos se envuelvan en la siguiente línea si no hay suficiente espacio */
+		    padding: 10px; /* Añade un poco de relleno alrededor del contenedor */
+		}
+
+			.card {
+		        width: 500px; 
+		        margin: 20px auto; /* Aumenta el margen para más separación */
+		        padding: 20px;
+		        background-color: rgba(230, 230, 250, 1); /* Lavanda claro */
+		        border: 3px solid rgb(0, 0, 0); /* Borde azul suave */
+		        border-radius: 15px; /* Bordes más redondeados */
+		        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+		        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+		    }
+		.card:hover {
+		    transform: translateY(-10px); /* Se eleva al pasar el ratón */
+		    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más profunda */
+		}
+		.section-title {
+		       text-align: center;
+		       margin-bottom: 20px; /* Espaciado inferior para separar del contenido */
+		   }
+
+		   .section-title i {
+		       font-size: 2rem; /* Aumenta el tamaño del icono */
+		       color: rgb(0, 0, 255); /* Cambia el color del icono */
+		       display: block; /* Hace que el icono esté centrado sobre el título */
+		       margin-bottom: 10px; /* Espacio entre el icono y el título */
+		   }
+
+		table {
+		    width: 100%;
+		    margin-top: 10px;
+		    border-spacing: 0 20px; /* Aumentar separación entre las filas */
+		}
+
+		table td {
+		    padding: 15px;
+		    background-color: #0056b3; /* Fondo más claro */
+		    border-radius: 10px; /* Redondear bordes de celdas */
+		    border: 1px solid #ddd; /* Borde claro */
+		    text-align: left; /* Alineación del texto a la izquierda */
+		}
+
+		.custom-badge {
+		    color: rgb(0, 0, 0);
+		    font-size: 1rem;
+			margin-top: 2px;
+			margin-bottom: 2px;
+		    padding: 5px 10px;
+		    margin-right: 5px;
+		    border-radius: 20px;
+		    display: inline-block; /* Para que el padding y el margen se apliquen correctamente */
+		}
+
+		.nivel-1 {
+		    background-color: red;
+		}
+
+		.nivel-2 {
+		    background-color: orange;
+		}
+
+		.nivel-3 {
+		    background-color: yellow;
+		}
+
+		.nivel-4 {
+		    background-color: green;
+		}
+
+		.badge-container {
+		    margin-top: 10px;
+		}
+
+		.badge-container > div {
+		    margin-bottom: 10px;
+		}
+
+		.btn-back {
+		    position: absolute;
+		    top: 20px;
+		    left: 20px;
+		    background-color: #007bff; 
+		    color: #fff; 
+		    border: none;
+		    padding: 10px 15px; /* Tamaño más consistente */
+		    border-radius: 30px; /* Bordes redondeados */
+		    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+		    transition: background-color 0.3s ease; 
+		}
+
+		.toggle-btn {
+		    border: none;
+		    background: none;
+		    font-size: 1.5rem;
+		    color: #000;
+		    cursor: pointer;
+		}
+
+		h2 {
+		    font-family: 'Arial', sans-serif; /* Fuente limpia y profesional */
+		    font-size: 2.5rem; /* Tamaño del texto */
+		    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+		    letter-spacing: 3px; /* Espaciado entre letras */
+		    text-align: center; /* Centrado */
+		    background: linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 255)); /* Gradiente de color */
+		    -webkit-background-clip: text; /* Clip del fondo al texto para mostrar el gradiente */
+		    color: transparent; /* Texto transparente para mostrar el gradiente */
+		    padding: 10px 20px; /* Espaciado alrededor del texto */
+		    position: relative;
+		}
+		
+        
+    </style>
+</head>
+<body>
+	<a href="/login" class="btn btn-dark btn-lg btn-back"><i class="bi bi-arrow-left"></i> Volver</a>
+	<div class="container">
+	    <div class="card">
+	        <div class="section-title">
+	            <i class="bi bi-person-badge-fill"></i>
+	            <h2>DATOS PERSONALES</h2>
+	        </div>
+	        <table class="table">
+	            <tr>
+	                <td><strong>Tipo de Documento:</strong> [[${user.tipoDocumento}]]: [[${user.numDocumento}]]</td>
+	            </tr>
+	            <tr>
+	                <td><strong>Teléfono:</strong> [[${user.numTelefono}]]</td>
+	            </tr>
+	            <tr>
+	                <td><strong>Número de registro:</strong> [[${user.numRegister}]]</td>
+	            </tr>
+	            <tr>
+	                <td><strong>Email:</strong> [[${user.email}]]</td>
+	            </tr>
+	        </table>
+	    </div>
+	</div>
+
+
+
+  <div class="card">
+    
+	<div class="section-title">
+	            <i class="bi bi-bar-chart-fill"></i>
+                <h2 style="text-align: center;">PUNTAJE GLOBAL DE COMPETENCIAS</h2>
+	</div>
+                <div class="badge-container">
+                    <div>
+                        <strong>TU PUNTAJE:</strong>
+						<span class="badge rounded-pill custom-badge nivel-1" th:if="${user.PuntajeGlobal =='ANULADO'}">[[${user.puntajeNivelGlobal}]]</span>
+                        <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.PuntajeGlobal > '0' and user.PuntajeGlobal <= '125'}">[[${user.puntajeNivelGlobal}]]</span>
+                        <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.PuntajeGlobal > '125' and user.PuntajeGlobal <= '155'}">[[${user.puntajeNivelGlobal}]]</span>
+                        <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.PuntajeGlobal > '155' and user.PuntajeGlobal <= '190'}">[[${user.puntajeNivelGlobal}]]</span>
+                        <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.PuntajeGlobal > '190'}">[[${user.puntajeNivelGlobal}]]</span>
+                        <span>[[${user.PuntajeGlobal}]]</span>
+						
+                    </div>
+					<span class="badge rounded-pill custom-badge nivel-4" th:if="${user.PuntajeGlobal > '125' and user.PuntajeGlobal != 'ANULADO'}">Resultado: Aprobado</span>
+					    
+					    <!-- Mostrar resultado reprobado solo si no está anulado -->
+					    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.PuntajeGlobal >= '1' and user.PuntajeGlobal <= '125' and user.PuntajeGlobal != 'ANULADO'}">Resultado: Reprobado</span>
+					    
+					    <!-- No mostrar "Resultado: F" si el puntaje es ANULADO -->
+					    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.PuntajeGlobal == 'ANULADO'}">Resultado: ANULADO</span>
+                </div>
+            </div>
+     
+
+			<			<div class="card">
+			    <div class="section-title">
+			        <i class="bi bi-bar-chart-fill"></i>
+			        <h2 class="text-center">PUNTAJE DE CADA COMPETENCIA</h2>
+			    </div>
+
+			    <!-- Botón para colapsar/desplegar -->
+			    <button class="toggle-btn" type="button" data-bs-toggle="collapse" data-bs-target="#competencias" aria-expanded="false" aria-controls="competencias">
+			        <i class="bi bi-chevron-down" id="toggle-icon"></i>
+			    </button>
+
+			    <!-- Contenido colapsable -->
+			    <div style="text-align: center;" id="competencias" class="collapse">
+			        <div class="badge-container">
+
+			            <!-- Comunicación escrita -->
+			            <div>
+			                <strong><i class="bi bi-pencil-fill"></i> Comunicación escrita</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.comunicacionEscrita > '0' and user.comunicacionEscrita <='125'}">[[${user.comunicacionEscritaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.comunicacionEscrita > '125' and user.comunicacionEscrita <= '155'}">[[${user.comunicacionEscritaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.comunicacionEscrita > '155' and user.comunicacionEscrita <= '190'}">[[${user.comunicacionEscritaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.comunicacionEscrita > '190'}">[[${user.comunicacionEscritaNivel}]]</span>
+			                    [[${user.comunicacionEscrita}]]
+			                </div>
+			            </div>
+
+			            <!-- Razonamiento Cuantitativo -->
+			            <div>
+			                <strong><i class="bi bi-graph-up-arrow"></i> Razonamiento cuantitativo</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.razonamientoCuantitativo > '0' and user.razonamientoCuantitativo <= '125'}">[[${user.razonamientoCuantitativoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.razonamientoCuantitativo > '125' and user.razonamientoCuantitativo <= '155'}">[[${user.razonamientoCuantitativoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.razonamientoCuantitativo > '155' and user.razonamientoCuantitativo <= '190'}">[[${user.razonamientoCuantitativoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.razonamientoCuantitativo > '190'}">[[${user.razonamientoCuantitativoNivel}]] :</span>
+			                    [[${user.razonamientoCuantitativo}]]
+			                </div>
+			            </div>
+
+			            <!-- Lectura crítica -->
+			            <div>
+			                <strong><i class="bi bi-book-fill"></i> Lectura crítica</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.lecturaCritica > '0' and user.lecturaCritica <= '125'}">[[${user.lecturaCriticaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.lecturaCritica > '125' and user.lecturaCritica <= '155'}">[[${user.lecturaCriticaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.lecturaCritica > '155' and user.lecturaCritica <= '190'}">[[${user.lecturaCriticaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.lecturaCritica > '190'}">[[${user.lecturaCriticaNivel}]] :</span>
+			                    [[${user.lecturaCritica}]]
+			                </div>
+			            </div>
+
+			            <!-- Competencias ciudadanas -->
+			            <div>
+			                <strong><i class="bi bi-people-fill"></i> Competencias ciudadanas</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.competenciasCiudadanas > '0' and user.competenciasCiudadanas <= '125'}">[[${user.competenciasCiudadanasNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.competenciasCiudadanas > '125' and user.competenciasCiudadanas <= '155'}">[[${user.competenciasCiudadanasNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.competenciasCiudadanas > '155' and user.competenciasCiudadanas <= '190'}">[[${user.competenciasCiudadanasNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.competenciasCiudadanas > '190'}">[[${user.competenciasCiudadanasNivel}]] :</span>
+			                    [[${user.competenciasCiudadanas}]]
+			                </div>
+			            </div>
+
+			            <!-- Inglés -->
+			            <div>
+			                <strong><i class="bi bi-translate"></i> Inglés</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.ingles > '0' and user.ingles <= '125'}">[[${user.inglesNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.ingles > '125' and user.ingles <= '155'}">[[${user.inglesNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.ingles > '155' and user.ingles <= '190'}">[[${user.inglesNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.ingles > '190'}">[[${user.inglesNivel}]] :</span>
+			                    [[${user.ingles}]]
+			                </div>
+			            </div>
+
+			            <!-- Formulación de proyectos de Ingeniería -->
+			            <div>
+			                <strong><i class="bi bi-gear-fill"></i> Formulación de proyectos de Ingeniería</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.proyectosIngenieria > '0' and user.proyectosIngenieria <= '125'}">[[${user.proyectosIngenieriaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.proyectosIngenieria > '125' and user.proyectosIngenieria <= '155'}">[[${user.proyectosIngenieriaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.proyectosIngenieria > '155' and user.proyectosIngenieria <= '190'}">[[${user.proyectosIngenieriaNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.proyectosIngenieria > '190'}">[[${user.proyectosIngenieriaNivel}]] :</span>
+			                    [[${user.proyectosIngenieria}]]
+			                </div>
+			            </div>
+
+			            <!-- Pensamiento matemático -->
+			            <div>
+			                <strong><i class="bi bi-calculator-fill"></i> Pensamiento Científico -
+							Matemáticas Y Estadística</strong>
+			                <div>
+			                    <span class="badge rounded-pill custom-badge nivel-1" th:if="${user.pensamientoMatematico > '0' and user.pensamientoMatematico <= '125'}">[[${user.pensamientoMatematicoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-2" th:if="${user.pensamientoMatematico > '125' and user.pensamientoMatematico <= '155'}">[[${user.pensamientoMatematicoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-3" th:if="${user.pensamientoMatematico > '155' and user.pensamientoMatematico <= '190'}">[[${user.pensamientoMatematicoNivel}]] :</span>
+			                    <span class="badge rounded-pill custom-badge nivel-4" th:if="${user.pensamientoMatematico > '190'}">[[${user.pensamientoMatematicoNivel}]] :</span>
+			                    [[${user.pensamientoMatematico}]]
+			                </div>
+			            </div>
+					<div >
+					            <strong> <i class="bi bi-laptop-fill"></i> Diseño de software</strong>
+					            <div>
+					                <span  class="badge rounded-pill custom-badge nivel-1"
+					                    th:if="${user.disenhoSoftware > '0' and user.disenhoSoftware <= '125'}"
+					                    style=>[[${user.disenhoSoftwareNivel}]]
+					                    : </span>
+					                <span  class="badge rounded-pill custom-badge nivel-2"
+					                    th:if="${user.disenhoSoftware > '125' and user.disenhoSoftware <= '155'}"
+					                    style=>[[${user.disenhoSoftwareNivel}]]
+					                    : </span>
+					                <span  class="badge rounded-pill custom-badge nivel-3"
+					                    th:if="${user.disenhoSoftware > '155' and user.disenhoSoftware <= '190'}"
+					                    style=>[[${user.disenhoSoftwareNivel}]]
+					                    : </span>
+					                <span  class="badge rounded-pill custom-badge nivel-4" th:if="${user.disenhoSoftware > '190'}"
+					                    style=>[[${user.disenhoSoftwareNivel}]]
+					                    : </span>
+					                [[${user.disenhoSoftware}]]
+					            </div>
+					        </div>
+
+												
+												<div >
+													<strong> <i class="bi bi-chat-dots-fill"></i> Nivel del inglés</strong>
+													<div>
+														<span class="badge rounded-pill custom-badge"
+															>[[${user.nivelDeIngles}]]
+															</span>
+													</div>
+												</div>
+											</div>
+									</div>
+<script>
+				    const toggleBtn = document.querySelector('.toggle-btn');
+				    const toggleIcon = document.getElementById('toggle-icon');
+				    
+				    toggleBtn.addEventListener('click', () => {
+				        toggleIcon.classList.toggle('bi-chevron-up');
+				        toggleIcon.classList.toggle('bi-chevron-down');
+				    });
+				</script>
+
+	  <!-- ====================================================================================================== -->
+    <!-- Scripts de Bootstrap y otros scripts personalizados -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLR4g5g6j5q72ovIL5uy4ve5g7F5w5F5F5F5F5F5F5"
+        crossorigin="anonymous"></script>
+
+    <!-- Popper.js desde CDN (necesario para Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.10.2/dist/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	
+	
+		
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
